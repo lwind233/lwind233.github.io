@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>27 移除元素</title>
+    <url>/2026/01/05/2026-01-05-27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</url>
+    <content><![CDATA[<p>遍历一遍数组，一遍遍历一遍更新元素，同时维护一个偏移量，每有一个需要被移出的元素，偏移量就加一，最后偏移量就是被移除的元素数量</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">int</span> offset=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> nums.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i+offset&lt;=l;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i+offset&lt;=l-<span class="number">1</span> &amp;&amp; nums[i+offset]==val)&#123;</span><br><span class="line">                offset++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i+offset&gt;=l)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            nums[i] = nums[i+offset];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l-offset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过我的思路复杂了，还有更简单的实现方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">int</span> offset=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> nums.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=l-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]!=val)&#123;</span><br><span class="line">                nums[offset] = nums[i];</span><br><span class="line">                offset++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> offset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本身整个代码也是双指针的思想</p>
+]]></content>
+      <categories>
+        <category>代码随想录</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>原地运算</tag>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>704 二分查找</title>
     <url>/2026/01/05/2026-01-05-704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</url>
     <content><![CDATA[<p>二分感觉没啥好说的，单调数列，一个左指针一个右指针，中间值直接取二者平均值，然后遍历直到找到目标即可<br>（如果数列长度过大考虑l+r-l&#x2F;2防止溢出）</p>
