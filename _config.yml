@@ -104,3 +104,10 @@ deploy:
   type: git
   repo: https://github.com/lwind233/lwind233.github.io.git
   branch: main
+
+# Search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
