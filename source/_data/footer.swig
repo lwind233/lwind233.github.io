@@ -2,7 +2,7 @@
 <script>
 function show_date_time(){
     window.setTimeout("show_date_time()", 1000);
-    var BirthDay = new Date("01/05/2026 00:00:00");
+    var BirthDay = new Date("01/05/2026 21:08:48");
     var today = new Date();
     var timeold = (today.getTime() - BirthDay.getTime());
     var msPerDay = 24 * 60 * 60 * 1000;
