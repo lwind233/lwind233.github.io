@@ -22,32 +22,43 @@
     width: 100%;
     margin: 0 auto;
     border: none !important;
-    font-size: 10px; /* Adjust font size */
+    font-size: 10px;
   }
-  /* Hide the ugly footer with stats */
+  /* Hide the "streak" columns (Longest streak, Current streak) to save space and match GitHub style */
+  .github-calendar .contrib-column {
+    display: none !important;
+  }
+  /* Keep the footer but clean it up */
   .github-calendar .contrib-footer {
-    display: none !important;
+    display: block !important;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 11px;
   }
-  /* Hide the legend colors */
+  /* Show the legend */
   .github-calendar .contrib-legend {
+    display: inline-block !important;
+  }
+  /* Hide the "Learn how we count contributions" link */
+  .github-calendar .contrib-footer a {
     display: none !important;
   }
-  /* Hide the "Learn how we count contributions" and other links */
-  .github-calendar a {
-    display: none !important;
-  }
-  /* Specific fix for "Skip to..." text if it appears in a specific container */
+  /* Specific fix for "Skip to..." text */
   .github-calendar .sr-only, 
   .github-calendar h2 {
     display: none !important;
   }
   /* Center the graph */
   .github-calendar .js-calendar-graph {
-    padding: 5px !important;
+    padding: 0 !important;
     text-align: center;
   }
   .github-calendar .js-calendar-graph-svg {
     width: 100%;
+  }
+    /* Ensure tooltips are visible */
+  .svg-tip {
+      z-index: 9999 !important;
   }
 </style>
 
