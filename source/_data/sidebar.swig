@@ -1,6 +1,6 @@
-<!-- Hitokoto (Daily Quote) Widget -->
+<!-- Jinrishici (Daily Poetry) Widget -->
 <div class="sidebar-project sidebar-hitokoto" style="margin-top: 20px; text-align: center; border-top: 1px dashed #ccc; padding-top: 15px;">
-  <div style="font-weight: bold; margin-bottom: 10px;">每日一言</div>
+  <div style="font-weight: bold; margin-bottom: 10px;">每日诗词</div>
   <div id="hitokoto-content" style="font-style: italic; font-size: 13px; min-height: 50px;">
     Loading...
   </div>
@@ -8,15 +8,15 @@
 </div>
 
 <script>
-  fetch('https://v1.hitokoto.cn')
+  fetch('https://v1.jinrishici.com/all.json')
     .then(response => response.json())
     .then(data => {
-      document.getElementById('hitokoto-content').innerText = data.hitokoto;
-      document.getElementById('hitokoto-from').innerText = '—— ' + data.from;
+      document.getElementById('hitokoto-content').innerText = data.content;
+      document.getElementById('hitokoto-from').innerText = '—— ' + data.author + '《' + data.origin + '》';
     })
     .catch(err => {
-      console.error('Hitokoto API fetch error:', err);
-      document.getElementById('hitokoto-content').innerText = "相遇是缘。"; 
+      console.error('Jinrishici API fetch error:', err);
+      document.getElementById('hitokoto-content').innerText = "海内存知己，天涯若比邻。"; 
     });
 </script>
 
