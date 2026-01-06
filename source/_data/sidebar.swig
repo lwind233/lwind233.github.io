@@ -14,23 +14,40 @@
 
 <style>
   .github-calendar {
-    padding-top: 20px;
-    min-height: 150px;
+    padding-top: 10px;
+    border: none !important;
+    min-height: auto;
   }
   .github-calendar .calendar {
-    /* Adjust width to fit sidebar if needed */
     width: 100%;
     margin: 0 auto;
+    border: none !important;
+    font-size: 10px; /* Adjust font size */
   }
-  /* Optional: Hide some text or adjust font size for small sidebar */
+  /* Hide the ugly footer with stats */
+  .github-calendar .contrib-footer {
+    display: none !important;
+  }
+  /* Hide the legend colors */
   .github-calendar .contrib-legend {
-    display: none; /* Hide legend to save space */
+    display: none !important;
   }
-  .github-calendar text.Month {
-    font-size: 10px;
+  /* Hide the "Learn how we count contributions" and other links */
+  .github-calendar a {
+    display: none !important;
   }
-  .github-calendar text.wday {
-    font-size: 9px;
+  /* Specific fix for "Skip to..." text if it appears in a specific container */
+  .github-calendar .sr-only, 
+  .github-calendar h2 {
+    display: none !important;
+  }
+  /* Center the graph */
+  .github-calendar .js-calendar-graph {
+    padding: 5px !important;
+    text-align: center;
+  }
+  .github-calendar .js-calendar-graph-svg {
+    width: 100%;
   }
 </style>
 
