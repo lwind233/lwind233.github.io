@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 20:26:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T20:26:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 20:26:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T20:26:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -226,7 +226,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>800</span>
+              <span>851</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -256,7 +256,9 @@
 <p>而且两者的相遇点肯定是在环上，因为慢指针不可能脱离环。</p>
 <p>但二者又是等速指针，还能在环上相遇，说明二者在点a之前就已经相遇了，也就是说当快指针刚进入环时就和慢指针相遇了，不然不可能前面还不相遇一到点a两个等速指针就相遇了。</p>
 <p>因此，第二次两个等速指针首次相遇的位置就是环的入口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">tHead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>();</span><br><span class="line">        tHead.next = head;</span><br><span class="line">        ListNode slow=tHead,fast=tHead;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(slow==fast) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        fast = tHead;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(slow==fast) <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">tHead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>();</span><br><span class="line">        tHead.next = head;</span><br><span class="line">        ListNode slow=tHead,fast=tHead;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span>(slow==fast) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast = tHead;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(slow==fast) <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>快指针一定可以追上慢指针，那样直接算两个指针的路程差就可以找出入口了，那样也可以做，不过感觉还是这个方法更容易理解</p>
 
       
     </div>
@@ -301,7 +303,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 19:55:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T19:55:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 19:55:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T19:55:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -384,7 +386,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 17:44:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T17:44:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 17:44:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T17:44:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -469,7 +471,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 17:29:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T17:29:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 17:29:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T17:29:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -555,7 +557,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 17:12:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T17:12:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 17:12:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T17:12:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -645,7 +647,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 16:59:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T16:59:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 16:59:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T16:59:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -730,7 +732,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 16:48:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T16:48:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 16:48:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T16:48:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -815,7 +817,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 12:04:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T12:04:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 12:04:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T12:04:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -898,7 +900,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-06 11:35:00 / 修改时间：20:46:09" itemprop="dateCreated datePublished" datetime="2026-01-06T11:35:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 11:35:00 / 修改时间：20:47:43" itemprop="dateCreated datePublished" datetime="2026-01-06T11:35:00+08:00">2026-01-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -988,7 +990,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-06 20:46:09" itemprop="dateModified" datetime="2026-01-06T20:46:09+08:00">2026-01-06</time>
+                <time title="修改时间：2026-01-06 20:47:43" itemprop="dateModified" datetime="2026-01-06T20:47:43+08:00">2026-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
