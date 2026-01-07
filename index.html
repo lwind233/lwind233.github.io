@@ -183,6 +183,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/267ca72f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/267ca72f.html" class="post-title-link" itemprop="url">15 三数之和</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-01-07 13:44:00 / 修改时间：14:03:49" itemprop="dateCreated datePublished" datetime="2026-01-07T13:44:00+08:00">2026-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>明明是二刷却完全没印象，最后绞尽脑汁用回溯勉强没超时</p>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>思路由两数之和推广而来，a+b+c&#x3D;0，统计a+b，找0-a-b是否存在即可<br>问题可以转化为，依次取数组中的两个数，判断这里两个数之和的负数是否在数组里，同时解唯一</p>
+<p>用哈希表统计数组中每个数字的个数，然后分两次循环遍历哈希表的键集合，每次取一个数字并减少其频数，判断两个键的和的负数是否在哈希表里。同时为了去重，强制让a&lt;&#x3D;b&lt;&#x3D;c，遍历完毕后恢复数字的频数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    HashMap&lt;Integer,Integer&gt; set;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        set = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=nums.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            set.put(nums[i],set.getOrDefault(nums[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(Integer key:set.keySet())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> set.get(key); </span><br><span class="line">            set.put(key,t-<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span>(Integer nKey:set.keySet())&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> set.get(nKey);</span><br><span class="line">                set.put(nKey,c-<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(c&gt;<span class="number">0</span> &amp;&amp; nKey&gt;=key)&#123;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nKey+key;</span><br><span class="line">                    <span class="keyword">if</span>(set.containsKey(<span class="number">0</span>-sum) &amp;&amp; set.get(<span class="number">0</span>-sum)&gt;=<span class="number">1</span> &amp;&amp; <span class="number">0</span>-sum&gt;=nKey)&#123;</span><br><span class="line">                        List&lt;Integer&gt; tmp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(key,nKey,<span class="number">0</span>-sum));</span><br><span class="line">                        result.add(tmp);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                set.put(nKey,c);             </span><br><span class="line">            &#125;</span><br><span class="line">            set.put(key,t);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p>先给数组排序，然后对下标i，定义双指针left&#x3D;i+1，right&#x3D;length-1，这样自然满足之前的a&lt;&#x3D;b&lt;&#x3D;c的要求。</p>
+<p>然后计算i+left+right的和是不是0，大于0的话向左移动right，小于0的话向右移动right，直到left和right相遇。</p>
+<p>随后的问题是去重，当i递增时，i不应该跟自己刚刚遍历的元素一样，否则自然重复了。同时也要对left和right进行去重</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        int left,right;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;=nums.length-1-2;i++)&#123;</span><br><span class="line">            if(i&gt;0 &amp;&amp; nums[i]==nums[i-1]) continue;</span><br><span class="line">            left = i+1;</span><br><span class="line">            right = nums.length-1;</span><br><span class="line">            while(left&lt;right)&#123;</span><br><span class="line">                if(nums[i]+nums[left]+nums[right]&gt;0) right--;</span><br><span class="line">                else if(nums[i]+nums[left]+nums[right]&lt;0) left++;</span><br><span class="line">                else&#123;</span><br><span class="line">                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));</span><br><span class="line">                    while(left&lt;right &amp;&amp; nums[right]==nums[right-1]) right--;</span><br><span class="line">                    while(left&lt;right &amp;&amp; nums[left]==nums[left+1]) left++;</span><br><span class="line">                    // 注意上面是去重，下面才是移动指针</span><br><span class="line">                    right--;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/c5f03ab7.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,10 +300,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 23:17:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T23:17:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 23:17:00" itemprop="dateCreated datePublished" datetime="2026-01-06T23:17:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -293,10 +393,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 23:03:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T23:03:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 23:03:00" itemprop="dateCreated datePublished" datetime="2026-01-06T23:03:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -380,10 +486,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 22:30:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T22:30:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 22:30:00" itemprop="dateCreated datePublished" datetime="2026-01-06T22:30:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -467,10 +579,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 22:08:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T22:08:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 22:08:00" itemprop="dateCreated datePublished" datetime="2026-01-06T22:08:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -554,10 +672,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 21:43:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T21:43:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 21:43:00" itemprop="dateCreated datePublished" datetime="2026-01-06T21:43:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -641,10 +765,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 20:59:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T20:59:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 20:59:00" itemprop="dateCreated datePublished" datetime="2026-01-06T20:59:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -730,10 +860,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 20:26:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T20:26:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 20:26:00" itemprop="dateCreated datePublished" datetime="2026-01-06T20:26:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -829,10 +965,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 19:55:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T19:55:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 19:55:00" itemprop="dateCreated datePublished" datetime="2026-01-06T19:55:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -916,10 +1058,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-06 17:44:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T17:44:00+08:00">2026-01-06</time>
+              <time title="创建时间：2026-01-06 17:44:00" itemprop="dateCreated datePublished" datetime="2026-01-06T17:44:00+08:00">2026-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-07 14:03:49" itemprop="dateModified" datetime="2026-01-07T14:03:49+08:00">2026-01-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -963,96 +1111,6 @@
 <p>两个指针间隔n个距离</p>
 <p>当探头指到链表尾部时，前面的指针刚好是待删除节点的父节点</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">removeNthFromEnd</span><span class="params">(ListNode head, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">tHead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>();</span><br><span class="line">        tHead.next = head;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> tHead;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="keyword">while</span>(cnt&lt;n)&#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line">        pre.next = pre.next==<span class="literal">null</span> ? <span class="literal">null</span> : pre.next.next;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tHead.next;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/86f95108.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/86f95108.html" class="post-title-link" itemprop="url">24 两两交换链表中的节点</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-01-06 17:29:00 / 修改时间：23:20:50" itemprop="dateCreated datePublished" datetime="2026-01-06T17:29:00+08:00">2026-01-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>611</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>仍然是双指针，一个指针指向上一个节点对的尾节点，另一个指针指向当前节点对的头结点</p>
-<p>注意好赋值顺序即可，先用tmp存一下尾节点的下一个节点的位置，然后更新上一个节点对尾节点的下一节点，然后顺着往下更新当前节点对更新后的尾节点，最后调整当前尾节点的next值。最后更新pre和cur</p>
-<p>如果cur.next是空值，也就是到链表尾部了（链表节点数量为奇数），直接退出</p>
-<p>画图的话解释的会更方便，但这里不方便画图，看代码吧</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(head==<span class="literal">null</span> || head.next==<span class="literal">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">tHead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>();</span><br><span class="line">        tHead.next = head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> tHead;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> tHead.next;</span><br><span class="line">        ListNode tmp;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.next==<span class="literal">null</span>) <span class="keyword">break</span>;</span><br><span class="line">            tmp = cur.next.next;</span><br><span class="line">            pre.next = cur.next;</span><br><span class="line">            cur.next.next = cur;</span><br><span class="line">            cur.next = tmp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            pre = cur;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tHead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1139,7 +1197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1152,7 +1210,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1316,13 +1374,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">10k</span>
+    <span title="站点总字数">12k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">9 分钟</span>
+    <span title="站点阅读时长">11 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div><div id="days"></div>
