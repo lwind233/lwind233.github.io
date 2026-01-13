@@ -2,7 +2,7 @@
 title: MCP vs Function calling
 date: 2026-01-09T21:43:00
 tags:
-  - MCP
+  - mcp
   - function calling
 categories:
   - 大模型应用开发
