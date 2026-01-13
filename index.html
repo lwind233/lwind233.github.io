@@ -183,6 +183,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/b0393815.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b0393815.html" class="post-title-link" itemprop="url">大模型应用开发入门（一）Agent基本调用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-01-13 10:12:00 / 修改时间：10:14:34" itemprop="dateCreated datePublished" datetime="2026-01-13T10:12:00+08:00">2026-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="agent注册"><a href="#agent注册" class="headerlink" title="agent注册"></a>agent注册</h2><p>用于和大模型api交互的类都继承了ChatClient接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;deepseek-chat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ChatClient <span class="title function_">deepseekChatClient</span><span class="params">(DeepSeekChatModel deepSeekChatModel)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ChatClient.create(deepSeekChatModel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="agent调用"><a href="#agent调用" class="headerlink" title="agent调用"></a>agent调用</h2><p>单轮对话中，可以直接链式调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">public</span> ChatClient agent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">                .prompt()</span><br><span class="line">                .user()</span><br><span class="line">                .call()</span><br><span class="line">                .chatResponse();</span><br><span class="line"></span><br><span class="line">    <span class="type">AssistantMessage</span> <span class="variable">assistant</span> <span class="operator">=</span> output</span><br><span class="line">                             .getResult()</span><br><span class="line">                             .getOutput()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ChatClient交互的输入和输出都要依赖Message接口的实现类</p>
+<p>而多轮对话中，为了使得模型有上下文记忆，需要其存储先前的消息并再次发送给大模型</p>
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>消息可以分为四类</p>
+<ul>
+<li>用户消息 UserMessage</li>
+<li>大模型消息 AssistantMessage</li>
+<li>系统提示 SystemMessage</li>
+<li>工具消息 ToolResponseMessage</li>
+</ul>
+<h3 id="聊天记忆"><a href="#聊天记忆" class="headerlink" title="聊天记忆"></a>聊天记忆</h3><p>ChatMemory 接口定义了聊天对话记忆的存储机制，提供添加消息、检索消息及清空对话历史的方法。</p>
+<p>常用方法</p>
+<ul>
+<li>add(String, Message) 指定会话id，添加消息</li>
+<li>get(String) 根据指定的会话id按添加顺序返回消息列表</li>
+<li>clear(String) 根据指定的会话id清空消息列表</li>
+</ul>
+<h4 id="MessageWindowChatMemory"><a href="#MessageWindowChatMemory" class="headerlink" title="MessageWindowChatMemory"></a>MessageWindowChatMemory</h4><p>MessageWindowChatMemory 维护固定容量的消息窗口（默认 20 条）。当消息超限时，自动移除较早的对话消息（始终保留系统消息）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MessageWindowChatMemory</span> <span class="variable">memory</span> <span class="operator">=</span> MessageWindowChatMemory.builder()</span><br><span class="line">    .maxMessages(<span class="number">10</span>)</span><br><span class="line">    .build();</span><br><span class="line">此为 Spring AI 自动配置 ChatMemory Bean 时采用的默认消息类型。</span><br></pre></td></tr></table></figure>
+
+<p>可以将历史交互统一塞入到chatMemory中，然后通过调用时的prompt方法来为模型提供上下文记忆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Prompt</span> <span class="variable">prompt</span> <span class="operator">=</span> Prompt.builder()</span><br><span class="line">        .messages(chatMemory.get(sessionId))</span><br><span class="line">        .build();</span><br><span class="line"><span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">        .prompt(prompt)</span><br><span class="line">        .call()</span><br><span class="line">        .chatResponse();</span><br></pre></td></tr></table></figure>
+
+
+<p>有了这些，就可以实现一个具备多轮对话功能的agent了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/fe69269d.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,10 +317,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-12 22:10:00 / 修改时间：22:10:33" itemprop="dateCreated datePublished" datetime="2026-01-12T22:10:00+08:00">2026-01-12</time>
+              <time title="创建时间：2026-01-12 22:10:00" itemprop="dateCreated datePublished" datetime="2026-01-12T22:10:00+08:00">2026-01-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -288,10 +405,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-12 22:09:00 / 修改时间：22:10:33" itemprop="dateCreated datePublished" datetime="2026-01-12T22:09:00+08:00">2026-01-12</time>
+              <time title="创建时间：2026-01-12 22:09:00" itemprop="dateCreated datePublished" datetime="2026-01-12T22:09:00+08:00">2026-01-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -370,92 +493,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-01-12 22:08:00 / 修改时间：22:10:33" itemprop="dateCreated datePublished" datetime="2026-01-12T22:08:00+08:00">2026-01-12</time>
+              <time title="创建时间：2026-01-12 22:08:00" itemprop="dateCreated datePublished" datetime="2026-01-12T22:08:00+08:00">2026-01-12</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
                 </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>占位符</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/b0393815.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b0393815.html" class="post-title-link" itemprop="url">大模型应用开发入门（一）Agent基本调用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-01-12 22:07:00 / 修改时间：22:10:33" itemprop="dateCreated datePublished" datetime="2026-01-12T22:07:00+08:00">2026-01-12</time>
-            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -542,7 +589,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -632,7 +679,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -732,7 +779,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -827,7 +874,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -922,7 +969,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1016,7 +1063,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-12 22:10:33" itemprop="dateModified" datetime="2026-01-12T22:10:33+08:00">2026-01-12</time>
+                <time title="修改时间：2026-01-13 10:14:34" itemprop="dateModified" datetime="2026-01-13T10:14:34+08:00">2026-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1159,7 +1206,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1323,13 +1370,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">15k</span>
+    <span title="站点总字数">17k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div><div id="days"></div>
