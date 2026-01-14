@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-14 17:10:00 / 修改时间：17:18:21" itemprop="dateCreated datePublished" datetime="2026-01-14T17:10:00+08:00">2026-01-14</time>
+              <time title="创建时间：2026-01-14 17:10:00 / 修改时间：17:22:43" itemprop="dateCreated datePublished" datetime="2026-01-14T17:10:00+08:00">2026-01-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -226,7 +226,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>403</span>
+              <span>465</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -253,12 +253,14 @@
 </ul>
 <p>主要实现优化点在于如何进行文档切割</p>
 <h2 id="文档切割"><a href="#文档切割" class="headerlink" title="文档切割"></a>文档切割</h2><p>由于实际的文档格式繁多且复杂，导致RAG的文档切割策略多种多样，不存在一个可以完全适配所有文档格式的切分策略。有时候会使用多个策略相结合的方式来提高文档的查询准确率，减少幻觉</p>
+<p>分块的主要方法有</p>
 <ul>
 <li>朴素分块</li>
 <li>结构分块</li>
 <li>语义分块</li>
 <li>智能体分块</li>
 </ul>
+<p>各种分块方法之间并非是对立的，实际运用中可能会采用多粒度分块方法，进行多次分块，每次分块采用不同的分块方法。</p>
 <h3 id="朴素分块"><a href="#朴素分块" class="headerlink" title="朴素分块"></a>朴素分块</h3><p>朴素分块方法主要有固定长度分块以及按分隔符分块等。</p>
 <p>固定分块可能会导致上下文断裂，为了解决这个问题，可以引入重叠（overleap）。<br>按分隔符分块包括按句分块、按段分块以及按页分块等。</p>
 <h3 id="结构分块"><a href="#结构分块" class="headerlink" title="结构分块"></a>结构分块</h3><p>比如markdown文档这种结构区分很明显的文档，可以按各个标题进行分割。<br>或者json这种格式的文档，也可以切出各个部分的内容。</p>
@@ -314,7 +316,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -416,7 +418,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -533,7 +535,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -621,7 +623,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -711,7 +713,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -811,7 +813,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -906,7 +908,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1001,7 +1003,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1095,7 +1097,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-14 17:18:21" itemprop="dateModified" datetime="2026-01-14T17:18:21+08:00">2026-01-14</time>
+                <time title="修改时间：2026-01-14 17:22:43" itemprop="dateModified" datetime="2026-01-14T17:22:43+08:00">2026-01-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
