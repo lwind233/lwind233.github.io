@@ -183,6 +183,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/8170a206.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/8170a206.html" class="post-title-link" itemprop="url">101 对称二叉树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-01-15 21:34:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T21:34:00+08:00">2026-01-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>516</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>同时进行两个前序遍历，其中一个顺序是中左右，另一个是中右左，然后比较两个遍历的结果是否一致</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isSymmetric</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> traversal(root.left,root.right);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">traversal</span><span class="params">(TreeNode left, TreeNode right)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left==<span class="literal">null</span> &amp;&amp; right !=<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(left!=<span class="literal">null</span> &amp;&amp; right ==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(right==<span class="literal">null</span> &amp;&amp; left==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(right.val!=left.val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> traversal(left.left,right.right) &amp;&amp; traversal(left.right,right.left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/aa576989.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +295,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-15 21:18:00 / 修改时间：21:20:59" itemprop="dateCreated datePublished" datetime="2026-01-15T21:18:00+08:00">2026-01-15</time>
+              <time title="创建时间：2026-01-15 21:18:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T21:18:00+08:00">2026-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +384,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-15 21:12:00 / 修改时间：21:20:59" itemprop="dateCreated datePublished" datetime="2026-01-15T21:12:00+08:00">2026-01-15</time>
+              <time title="创建时间：2026-01-15 21:12:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T21:12:00+08:00">2026-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -388,7 +475,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-15 20:14:00 / 修改时间：21:20:59" itemprop="dateCreated datePublished" datetime="2026-01-15T20:14:00+08:00">2026-01-15</time>
+              <time title="创建时间：2026-01-15 20:14:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T20:14:00+08:00">2026-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -480,7 +567,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-15 19:37:00 / 修改时间：21:20:59" itemprop="dateCreated datePublished" datetime="2026-01-15T19:37:00+08:00">2026-01-15</time>
+              <time title="创建时间：2026-01-15 19:37:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T19:37:00+08:00">2026-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -568,7 +655,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-01-15 00:01:00 / 修改时间：21:20:59" itemprop="dateCreated datePublished" datetime="2026-01-15T00:01:00+08:00">2026-01-15</time>
+              <time title="创建时间：2026-01-15 00:01:00 / 修改时间：21:35:09" itemprop="dateCreated datePublished" datetime="2026-01-15T00:01:00+08:00">2026-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -664,7 +751,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 21:20:59" itemprop="dateModified" datetime="2026-01-15T21:20:59+08:00">2026-01-15</time>
+                <time title="修改时间：2026-01-15 21:35:09" itemprop="dateModified" datetime="2026-01-15T21:35:09+08:00">2026-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -757,7 +844,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 21:20:59" itemprop="dateModified" datetime="2026-01-15T21:20:59+08:00">2026-01-15</time>
+                <time title="修改时间：2026-01-15 21:35:09" itemprop="dateModified" datetime="2026-01-15T21:35:09+08:00">2026-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -850,7 +937,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 21:20:59" itemprop="dateModified" datetime="2026-01-15T21:20:59+08:00">2026-01-15</time>
+                <time title="修改时间：2026-01-15 21:35:09" itemprop="dateModified" datetime="2026-01-15T21:35:09+08:00">2026-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -943,7 +1030,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 21:20:59" itemprop="dateModified" datetime="2026-01-15T21:20:59+08:00">2026-01-15</time>
+                <time title="修改时间：2026-01-15 21:35:09" itemprop="dateModified" datetime="2026-01-15T21:35:09+08:00">2026-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -991,114 +1078,6 @@
 <h2 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h2><p>假设一个字符串s由子串ss拼成，那么s+s去掉首位字符后肯定还包含一个s</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">repeatedSubstringPattern</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">tmp</span> <span class="operator">=</span> (s+s).substring(<span class="number">1</span>,s.length()*<span class="number">2</span>-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> tmp.contains(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/fb760a05.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/fb760a05.html" class="post-title-link" itemprop="url">大模型应用开发入门（三）RAG引入</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-01-14 17:10:00" itemprop="dateCreated datePublished" datetime="2026-01-14T17:10:00+08:00">2026-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 21:20:59" itemprop="dateModified" datetime="2026-01-15T21:20:59+08:00">2026-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>472</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>RAG的基本流程</p>
-<ul>
-<li>文档切割与文档向量化</li>
-<li>计算问题与文档的相似度</li>
-<li>返回文档块</li>
-</ul>
-<p>主要实现优化点在于如何进行文档切割</p>
-<h2 id="文档切割"><a href="#文档切割" class="headerlink" title="文档切割"></a>文档切割</h2><p>由于实际的文档格式繁多且复杂，导致RAG的文档切割策略多种多样，不存在一个可以完全适配所有文档格式的切分策略。有时候会使用多个策略相结合的方式来提高文档的查询准确率，减少幻觉</p>
-<p>分块的主要方法有</p>
-<ul>
-<li>朴素分块</li>
-<li>结构分块</li>
-<li>语义分块</li>
-<li>智能体分块</li>
-</ul>
-<p>各种分块方法之间并非是对立的，实际运用中可能会采用多粒度分块方法，进行多次分块，每次分块采用不同的分块方法。</p>
-<h3 id="朴素分块"><a href="#朴素分块" class="headerlink" title="朴素分块"></a>朴素分块</h3><p>朴素分块方法主要有固定长度分块以及按分隔符分块等。</p>
-<p>固定分块可能会导致上下文断裂，为了解决这个问题，可以引入重叠（overleap）。<br>按分隔符分块包括按句分块、按段分块以及按页分块等。</p>
-<h3 id="结构分块"><a href="#结构分块" class="headerlink" title="结构分块"></a>结构分块</h3><p>比如markdown文档这种结构区分很明显的文档，可以按各个标题进行分割。<br>或者json这种格式的文档，也可以切出各个部分的内容。</p>
-<h3 id="语义分块"><a href="#语义分块" class="headerlink" title="语义分块"></a>语义分块</h3><p>计算各个部分的语义相似度，当两个块之间的余弦相似度过低时分为两块</p>
-<h3 id="智能体分块"><a href="#智能体分块" class="headerlink" title="智能体分块"></a>智能体分块</h3><p>让大模型判断文档到哪个部分分块<br>资源消耗量极大，只适合高价值的少量文档</p>
-<h2 id="相似度计算"><a href="#相似度计算" class="headerlink" title="相似度计算"></a>相似度计算</h2><h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h3><h3 id="多召回"><a href="#多召回" class="headerlink" title="多召回"></a>多召回</h3>
       
     </div>
 
@@ -1184,7 +1163,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1361,7 +1340,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">25k</span>
+    <span title="站点总字数">26k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
