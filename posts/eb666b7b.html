@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"lwind233.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="占位符">
+  <meta name="description" content="暴力解法利用一个哈希表统计各个数字出现的频数，然后维护一个大小为k的小根堆，将哈希表中所有的键往里面存一遍，最后将小根堆里的元素弹出到结果数组里。 真幽默，想半天把时间复杂度nlogk当成nlogn了，答案想出来了还觉得不对 1234567891011121314151617181920212223242526272829303132333435class Solution &#123;    c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大模型应用开发入门（四）MCP协议">
-<meta property="og:url" content="https://lwind233.github.io/posts/fe69269d.html">
+<meta property="og:title" content="347 前k个高频元素">
+<meta property="og:url" content="https://lwind233.github.io/posts/eb666b7b.html">
 <meta property="og:site_name" content="鹭园风吟">
-<meta property="og:description" content="占位符">
+<meta property="og:description" content="暴力解法利用一个哈希表统计各个数字出现的频数，然后维护一个大小为k的小根堆，将哈希表中所有的键往里面存一遍，最后将小根堆里的元素弹出到结果数组里。 真幽默，想半天把时间复杂度nlogk当成nlogn了，答案想出来了还觉得不对 1234567891011121314151617181920212223242526272829303132333435class Solution &#123;    c">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-01-12T14:10:00.000Z">
+<meta property="article:published_time" content="2026-01-15T11:37:00.000Z">
 <meta property="article:modified_time" content="2026-01-15T12:10:55.498Z">
 <meta property="article:author" content="朗风">
-<meta property="article:tag" content="agent">
-<meta property="article:tag" content="mcp">
-<meta property="article:tag" content="springai">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="数组">
+<meta property="article:tag" content="栈与队列">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lwind233.github.io/posts/fe69269d.html">
+<link rel="canonical" href="https://lwind233.github.io/posts/eb666b7b.html">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>大模型应用开发入门（四）MCP协议 | 鹭园风吟</title>
+  <title>347 前k个高频元素 | 鹭园风吟</title>
   
 
 
@@ -191,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/fe69269d.html">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/eb666b7b.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://github.com/lwind233.png">
@@ -204,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          大模型应用开发入门（四）MCP协议
+          347 前k个高频元素
         </h1>
 
         <div class="post-meta">
@@ -213,23 +214,21 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-01-12 22:10:00" itemprop="dateCreated datePublished" datetime="2026-01-12T22:10:00+08:00">2026-01-12</time>
+              <time title="创建时间：2026-01-15 19:37:00 / 修改时间：20:10:55" itemprop="dateCreated datePublished" datetime="2026-01-15T19:37:00+08:00">2026-01-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-15 20:10:55" itemprop="dateModified" datetime="2026-01-15T20:10:55+08:00">2026-01-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
                 </span>
             </span>
 
@@ -239,7 +238,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3</span>
+              <span>859</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -258,7 +257,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>占位符</p>
+        <h2 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h2><p>利用一个哈希表统计各个数字出现的频数，然后维护一个大小为k的小根堆，将哈希表中所有的键往里面存一遍，最后将小根堆里的元素弹出到结果数组里。</p>
+<p>真幽默，想半天把时间复杂度nlogk当成nlogn了，答案想出来了还觉得不对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Item</span>&#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        <span class="type">int</span> feq;</span><br><span class="line">        Item(<span class="type">int</span> val,<span class="type">int</span> feq)&#123;</span><br><span class="line">            <span class="built_in">this</span>.val=val;</span><br><span class="line">            <span class="built_in">this</span>.feq=feq;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        PriorityQueue&lt;Item&gt; minHeap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="number">1</span>,(a,b)-&gt;(a.feq-b.feq));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=nums.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            map.put(nums[i],map.getOrDefault(nums[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(Integer key:map.keySet())&#123;</span><br><span class="line">            <span class="keyword">if</span>(minHeap.size()&lt;k)&#123;</span><br><span class="line">                minHeap.offer(<span class="keyword">new</span> <span class="title class_">Item</span>(key,map.get(key)));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                minHeap.offer(<span class="keyword">new</span> <span class="title class_">Item</span>(key,map.get(key)));</span><br><span class="line">                minHeap.poll();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span>[] result = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=k-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            result[i] = minHeap.poll().val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -268,9 +269,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/mcp/" rel="tag"># mcp</a>
-              <a href="/tags/agent/" rel="tag"># agent</a>
-              <a href="/tags/springai/" rel="tag"># springai</a>
+              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"># 哈希表</a>
+              <a href="/tags/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/" rel="tag"># 栈与队列</a>
+              <a href="/tags/%E5%A0%86/" rel="tag"># 堆</a>
           </div>
 
         
@@ -279,13 +281,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/e76dd3a4.html" rel="prev" title="暂存">
-      <i class="fa fa-chevron-left"></i> 暂存
+    <a href="/posts/f7491bcb.html" rel="prev" title="239 滑动窗口最大值">
+      <i class="fa fa-chevron-left"></i> 239 滑动窗口最大值
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/b0393815.html" rel="next" title="大模型应用开发入门（一）Agent基本调用">
-      大模型应用开发入门（一）Agent基本调用 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -344,6 +343,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">暴力解法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
