@@ -11,8 +11,8 @@ collections:
     label: "文章"
     folder: "source/_posts"
     path: "{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
+    media_folder: "."
+    public_folder: "."
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     summary: "{{title}}"
