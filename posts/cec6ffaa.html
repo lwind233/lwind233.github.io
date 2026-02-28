@@ -20,21 +20,23 @@
     var CONFIG = {"hostname":"lwind233.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="先去重，这里面重复元素只会影响解题 然后只从起点开始找，找结尾最长的序列即可 12345678910111213141516class Solution &#123;    public int longestConsecutive(int[] nums) &#123;        Set&lt;Integer&gt; set &#x3D; new HashSet&lt;&gt;();        fo">
+  <meta name="description" content="维护一个滑动窗口，这个窗口内的子串需要是覆盖子串 覆盖子串的条件：窗口内的字符种类数formed要大于子串的种类数required formed增加条件：c是t中的字符，且t在窗口中的数量window等于需要的数量need formed减少条件：c是t中的字符，且t在窗口中的数量window小于需要的数量need 首先初始化窗口，初始化为left&#x3D;right&#x3D;0然后向右拓展，拓">
 <meta property="og:type" content="article">
-<meta property="og:title" content="128 最长连续序列">
-<meta property="og:url" content="https://lwind233.github.io/posts/6a29ceac.html">
+<meta property="og:title" content="78 最小覆盖子串">
+<meta property="og:url" content="https://lwind233.github.io/posts/cec6ffaa.html">
 <meta property="og:site_name" content="鹭园风吟">
-<meta property="og:description" content="先去重，这里面重复元素只会影响解题 然后只从起点开始找，找结尾最长的序列即可 12345678910111213141516class Solution &#123;    public int longestConsecutive(int[] nums) &#123;        Set&lt;Integer&gt; set &#x3D; new HashSet&lt;&gt;();        fo">
+<meta property="og:description" content="维护一个滑动窗口，这个窗口内的子串需要是覆盖子串 覆盖子串的条件：窗口内的字符种类数formed要大于子串的种类数required formed增加条件：c是t中的字符，且t在窗口中的数量window等于需要的数量need formed减少条件：c是t中的字符，且t在窗口中的数量window小于需要的数量need 首先初始化窗口，初始化为left&#x3D;right&#x3D;0然后向右拓展，拓">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-02-27T11:36:00.000Z">
+<meta property="article:published_time" content="2026-02-28T13:39:00.000Z">
 <meta property="article:modified_time" content="2026-02-28T13:53:06.000Z">
 <meta property="article:author" content="朗风">
+<meta property="article:tag" content="双指针">
 <meta property="article:tag" content="哈希表">
-<meta property="article:tag" content="数组">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="滑动窗口">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lwind233.github.io/posts/6a29ceac.html">
+<link rel="canonical" href="https://lwind233.github.io/posts/cec6ffaa.html">
 
 
 <script id="page-configurations">
@@ -47,7 +49,7 @@
   };
 </script>
 
-  <title>128 最长连续序列 | 鹭园风吟</title>
+  <title>78 最小覆盖子串 | 鹭园风吟</title>
   
 
 
@@ -190,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/6a29ceac.html">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/cec6ffaa.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://github.com/lwind233.png">
@@ -203,7 +205,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          128 最长连续序列
+          78 最小覆盖子串
         </h1>
 
         <div class="post-meta">
@@ -212,16 +214,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-02-27 19:36:00" itemprop="dateCreated datePublished" datetime="2026-02-27T19:36:00+08:00">2026-02-27</time>
+              <time title="创建时间：2026-02-28 21:39:00 / 修改时间：21:53:06" itemprop="dateCreated datePublished" datetime="2026-02-28T21:39:00+08:00">2026-02-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-02-28 21:53:06" itemprop="dateModified" datetime="2026-02-28T21:53:06+08:00">2026-02-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,7 +238,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>350</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -261,9 +257,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>先去重，这里面重复元素只会影响解题</p>
-<p>然后只从起点开始找，找结尾最长的序列即可</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">longestConsecutive</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Set&lt;Integer&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : nums) set.add(x);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">best</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : set) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!set.contains(x - <span class="number">1</span>)) &#123;      <span class="comment">// 只从起点开始扩展</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> x;</span><br><span class="line">                <span class="keyword">while</span> (set.contains(y)) y++;</span><br><span class="line">                best = Math.max(best, y - x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> best;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>维护一个滑动窗口，这个窗口内的子串需要是覆盖子串</p>
+<p>覆盖子串的条件：窗口内的字符种类数formed要大于子串的种类数required</p>
+<p>formed增加条件：c是t中的字符，且t在窗口中的数量window等于需要的数量need</p>
+<p>formed减少条件：c是t中的字符，且t在窗口中的数量window小于需要的数量need</p>
+<p>首先初始化窗口，初始化为left&#x3D;right&#x3D;0<br>然后向右拓展，拓展后判断当前是否满足窗口内是覆盖子串</p>
+<ul>
+<li>是，一边收缩左边界，一边记录有效覆盖子串的长度，直到无效</li>
+<li>否，继续拓展，直到变回覆盖子串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">minWindow</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (t.length() == <span class="number">0</span> || s.length() &lt; t.length()) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span>[] need = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">128</span>];</span><br><span class="line">        <span class="type">int</span>[] window = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">128</span>];</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">required</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; t.length(); i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> t.charAt(i);</span><br><span class="line">            <span class="keyword">if</span> (need[c] == <span class="number">0</span>) required++;</span><br><span class="line">            need[c]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">formed</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">bestLen</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">bestL</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">r</span> <span class="operator">=</span> <span class="number">0</span>; r &lt; s.length(); r++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> s.charAt(r);</span><br><span class="line">            window[c]++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (need[c] &gt; <span class="number">0</span> &amp;&amp; window[c] == need[c]) &#123;</span><br><span class="line">                formed++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (formed == required) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> r - l + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (len &lt; bestLen) &#123;</span><br><span class="line">                    bestLen = len;</span><br><span class="line">                    bestL = l;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> s.charAt(l);</span><br><span class="line">                window[d]--;</span><br><span class="line">                <span class="keyword">if</span> (need[d] &gt; <span class="number">0</span> &amp;&amp; window[d] &lt; need[d]) &#123;</span><br><span class="line">                    formed--;</span><br><span class="line">                &#125;</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> bestLen == Integer.MAX_VALUE ? <span class="string">&quot;&quot;</span> : s.substring(bestL, bestL + bestLen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -273,8 +276,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%95%B0%E7%BB%84/" rel="tag"># 数组</a>
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag"># 双指针</a>
               <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"># 哈希表</a>
+              <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag"># 滑动窗口</a>
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag"># 字符串</a>
           </div>
 
         
@@ -283,13 +288,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/a09172b7.html" rel="prev" title="49 字母异位词">
-      <i class="fa fa-chevron-left"></i> 49 字母异位词
+    <a href="/posts/36f85ab5.html" rel="prev" title="560 和为k的子数组">
+      <i class="fa fa-chevron-left"></i> 560 和为k的子数组
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/6662b667.html" rel="next" title="283 移动0">
-      283 移动0 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
