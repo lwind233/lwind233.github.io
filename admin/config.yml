@@ -3,15 +3,17 @@ backend:
   repo: lwind233/lwind233.github.io
   branch: source
 
-media_folder: source/images
-public_folder: /images
+# media_folder: source/images
+# public_folder: /images
 
 collections:
   - name: "posts"
     label: "文章"
     folder: "source/_posts"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"    
+    media_folder: "source/_posts/{{filename}}"
+    public_folder: ""    
     fields:
       - {label: "标题", name: "title", widget: "string"}
       - {label: "发布日期", name: "date", widget: "datetime"}
