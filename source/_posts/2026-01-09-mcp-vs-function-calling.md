@@ -1,11 +1,12 @@
 ---
 title: MCP vs Function calling
-date: 2026-01-09T21:43:00
 tags:
   - mcp
   - function calling
 categories:
   - 大模型应用开发
+abbrlink: 94a39dd7
+date: 2026-01-09 21:43:00
 ---
 问了半天GPT，算是简单弄明白了两者之间的关联
 
