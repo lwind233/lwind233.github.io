@@ -3,8 +3,8 @@ backend:
   repo: lwind233/lwind233.github.io
   branch: source
 
-# media_folder: source/images
-# public_folder: /images
+media_folder: source/images
+public_folder: /images
 
 collections:
   - name: "posts"
