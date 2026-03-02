@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 21:20:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T21:20:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 21:20:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T21:20:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,17 +255,13 @@
 <h2 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h2><p>核心思路</p>
 <p>用两个指针 pA、pB 分别从 headA、headB 出发：</p>
 <ul>
-<li><p>每次走一步</p>
-</li>
-<li><p>走到末尾（null）就跳到另一条链表的头继续走</p>
-</li>
+<li>每次走一步</li>
+<li>走到末尾（null）就跳到另一条链表的头继续走</li>
 </ul>
 <p>这样两个指针走过的总路程都是 lenA + lenB：</p>
 <ul>
-<li><p>如果有交点，会在交点相遇</p>
-</li>
-<li><p>如果没交点，会同时走到 null 相遇（返回 null）</p>
-</li>
+<li>如果有交点，会在交点相遇</li>
+<li>如果没交点，会同时走到 null 相遇（返回 null）</li>
 </ul>
 <p>时间 O(lenA + lenB)，空间 O(1)。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (headA == <span class="literal">null</span> || headB == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pA</span> <span class="operator">=</span> headA, pB = headB;</span><br><span class="line">        <span class="keyword">while</span> (pA != pB) &#123;</span><br><span class="line">            pA = (pA == <span class="literal">null</span>) ? headB : pA.next;</span><br><span class="line">            pB = (pB == <span class="literal">null</span>) ? headA : pB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pA; <span class="comment">// 相交点或 null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -313,7 +309,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 21:03:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T21:03:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 21:03:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T21:03:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -400,7 +396,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 20:39:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T20:39:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 20:39:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T20:39:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -487,7 +483,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 20:16:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T20:16:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 20:16:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T20:16:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -576,7 +572,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 19:26:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T19:26:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 19:26:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T19:26:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -663,7 +659,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 18:56:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T18:56:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 18:56:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T18:56:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -754,7 +750,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 17:31:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T17:31:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 17:31:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T17:31:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -847,7 +843,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 16:37:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T16:37:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 16:37:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T16:37:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -935,7 +931,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 16:12:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T16:12:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 16:12:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T16:12:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1022,7 +1018,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-02 15:35:00 / 修改时间：21:22:42" itemprop="dateCreated datePublished" datetime="2026-03-02T15:35:00+08:00">2026-03-02</time>
+              <time title="创建时间：2026-03-02 15:35:00 / 修改时间：22:19:17" itemprop="dateCreated datePublished" datetime="2026-03-02T15:35:00+08:00">2026-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
