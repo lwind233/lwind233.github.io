@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 21:32:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T21:32:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 21:32:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T21:32:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,7 +230,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>854</span>
+              <span>1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -252,7 +252,10 @@
           <p>先序遍历可以告诉我们第一个遍历的头结点是什么</p>
 <p>中序遍历序列中，头结点左侧的子数组就是左子树的中序遍历序列，右侧的子数组就是右子树的中序遍历序列</p>
 <p>那么只需要每次找出中序遍历序列中，在先序遍历里序号最小的节点作为头节点，并划分出左右子树，最后递归构建二叉树即可</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">buildTree</span><span class="params">(<span class="type">int</span>[] preorder, <span class="type">int</span>[] inorder)</span> &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; pMap = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> preorder.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            pMap.put(preorder[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> traversal(pMap,inorder,<span class="number">0</span>,inorder.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">traversal</span><span class="params">(Map&lt;Integer,Integer&gt; pMap, <span class="type">int</span>[] inorder, <span class="type">int</span> s, <span class="type">int</span> e)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s&gt;e) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> <span class="variable">minIdx</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=s;i&lt;=e;i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> pMap.get(inorder[i]);</span><br><span class="line">            <span class="keyword">if</span>(tmp&lt;minIdx)&#123;</span><br><span class="line">                minIdx = tmp;</span><br><span class="line">                idx = i;</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(inorder[idx]);</span><br><span class="line">        root.left = traversal(pMap,inorder,s,idx-<span class="number">1</span>);</span><br><span class="line">        root.right = traversal(pMap,inorder,idx+<span class="number">1</span>,e);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但是，这个实现并不是最优的。最优的实现是根据先序遍历序列找出头结点（也就是开头的元素），然后为中序序列建立哈希表，找出其下标，随后根据中序序列得出左右子树的节点数，对先序序列和中序序列进行划分，交给递归函数进行子树建立，这样的好处是时间复杂度更低，问题是这个节点数的计算可能有问题（我第一次就在这里踩了坑）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">buildTree</span><span class="params">(<span class="type">int</span>[] preorder, <span class="type">int</span>[] inorder)</span> &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; pMap = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> preorder.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            pMap.put(preorder[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> traversal(pMap,inorder,<span class="number">0</span>,inorder.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">traversal</span><span class="params">(Map&lt;Integer,Integer&gt; pMap, <span class="type">int</span>[] inorder, <span class="type">int</span> s, <span class="type">int</span> e)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s&gt;e) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">minIdx</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=s;i&lt;=e;i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> pMap.get(inorder[i]);</span><br><span class="line">            <span class="keyword">if</span>(tmp&lt;minIdx)&#123;</span><br><span class="line">                minIdx = tmp;</span><br><span class="line">                idx = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(inorder[idx]);</span><br><span class="line">        root.left = traversal(pMap,inorder,s,idx-<span class="number">1</span>);</span><br><span class="line">        root.right = traversal(pMap,inorder,idx+<span class="number">1</span>,e);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -297,7 +300,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 20:41:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T20:41:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 20:41:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T20:41:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -386,7 +389,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 19:46:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T19:46:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 19:46:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T19:46:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -474,7 +477,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 19:35:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T19:35:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 19:35:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T19:35:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -561,7 +564,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 17:22:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T17:22:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 17:22:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T17:22:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -652,7 +655,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 16:55:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T16:55:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 16:55:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T16:55:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -741,7 +744,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 16:04:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T16:04:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 16:04:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T16:04:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -828,7 +831,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 15:55:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T15:55:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 15:55:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T15:55:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -916,7 +919,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 11:40:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T11:40:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 11:40:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T11:40:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1003,7 +1006,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 10:25:00 / 修改时间：21:35:33" itemprop="dateCreated datePublished" datetime="2026-03-04T10:25:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 10:25:00 / 修改时间：21:43:44" itemprop="dateCreated datePublished" datetime="2026-03-04T10:25:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
