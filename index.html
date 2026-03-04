@@ -183,6 +183,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/1826651d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1826651d.html" class="post-title-link" itemprop="url">98 验证二叉搜索树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-03-04 17:22:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T17:22:00+08:00">2026-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>798</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h2><p>这玩意如果是二叉搜索树，那中序遍历结果肯定是严格递增数组，那么迭代遍历一遍然后看遍历过程中的结果是不是严格递增即可</p>
+<p>不给实现了</p>
+<h2 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h2><p>二叉搜索树的条件：左节点小于根节点小于右节点，同时根节点有一个根据父节点限定的取值范围</p>
+<p>每一层先判断根节点是否符合范围，然后判断左右子树是不是二叉搜索树，再判断左节点小于根节点小于右节点</p>
+<p>给子树限定范围时，右子树的最小值是根节点的值，左子树的最大值是根节点的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValidBST</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> fixIsValidBST(root,Long.MAX_VALUE,Long.MIN_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">fixIsValidBST</span><span class="params">(TreeNode root, <span class="type">long</span> max, <span class="type">long</span> min)</span>&#123;</span><br><span class="line">        <span class="type">boolean</span> left=<span class="literal">true</span>;</span><br><span class="line">        <span class="type">boolean</span> right=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>((<span class="type">long</span>) root.val&lt;=min || (<span class="type">long</span>) root.val&gt;=max) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span>)&#123;</span><br><span class="line">            left = root.val&gt;root.left.val &amp;&amp; fixIsValidBST(root.left,Math.min(root.val,max),min);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.right!=<span class="literal">null</span>)&#123;</span><br><span class="line">            right = root.val&lt;root.right.val &amp;&amp; fixIsValidBST(root.right,max,Math.max(root.val,min));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left&amp;&amp;right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/c57d8a21.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -208,7 +299,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 16:55:00 / 修改时间：17:21:03" itemprop="dateCreated datePublished" datetime="2026-03-04T16:55:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 16:55:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T16:55:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +388,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 16:04:00 / 修改时间：17:21:03" itemprop="dateCreated datePublished" datetime="2026-03-04T16:04:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 16:04:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T16:04:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -384,7 +475,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 15:55:00 / 修改时间：17:21:03" itemprop="dateCreated datePublished" datetime="2026-03-04T15:55:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 15:55:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T15:55:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -472,7 +563,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 11:40:00 / 修改时间：17:21:03" itemprop="dateCreated datePublished" datetime="2026-03-04T11:40:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 11:40:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T11:40:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -559,7 +650,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-04 10:25:00 / 修改时间：17:21:03" itemprop="dateCreated datePublished" datetime="2026-03-04T10:25:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-03-04 10:25:00 / 修改时间：17:27:04" itemprop="dateCreated datePublished" datetime="2026-03-04T10:25:00+08:00">2026-03-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -656,7 +747,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-04 17:21:03" itemprop="dateModified" datetime="2026-03-04T17:21:03+08:00">2026-03-04</time>
+                <time title="修改时间：2026-03-04 17:27:04" itemprop="dateModified" datetime="2026-03-04T17:27:04+08:00">2026-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -749,7 +840,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-04 17:21:03" itemprop="dateModified" datetime="2026-03-04T17:21:03+08:00">2026-03-04</time>
+                <time title="修改时间：2026-03-04 17:27:04" itemprop="dateModified" datetime="2026-03-04T17:27:04+08:00">2026-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -844,7 +935,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-04 17:21:03" itemprop="dateModified" datetime="2026-03-04T17:21:03+08:00">2026-03-04</time>
+                <time title="修改时间：2026-03-04 17:27:04" itemprop="dateModified" datetime="2026-03-04T17:27:04+08:00">2026-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -937,7 +1028,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-04 17:21:03" itemprop="dateModified" datetime="2026-03-04T17:21:03+08:00">2026-03-04</time>
+                <time title="修改时间：2026-03-04 17:27:04" itemprop="dateModified" datetime="2026-03-04T17:27:04+08:00">2026-03-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -980,99 +1071,6 @@
       
           <p>维护快慢指针遍历链表，快指针追上慢指针说明有环，快指针碰到null说明没有环</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="literal">null</span> &amp;&amp; slow!=<span class="literal">null</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            <span class="keyword">if</span>(fast==slow) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/cc6d42b7.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/cc6d42b7.html" class="post-title-link" itemprop="url">234 回文链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-03-03 11:18:00" itemprop="dateCreated datePublished" datetime="2026-03-03T11:18:00+08:00">2026-03-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-04 17:21:03" itemprop="dateModified" datetime="2026-03-04T17:21:03+08:00">2026-03-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>809</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>先利用快慢指针找出链表的中点，然后对后半部分链表进行翻转，最后分别从链表的中点和开头开始遍历链表，判断是否一致，一致就是回文链表</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1) 找中点：slow 最终在中点（偶数偏右中点）</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head, fast = head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2) 奇数长度：跳过中点</span></span><br><span class="line">        <span class="keyword">if</span> (fast != <span class="literal">null</span>) &#123; <span class="comment">// fast 没到 null 说明长度为奇数</span></span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3) 反转后半段</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">second</span> <span class="operator">=</span> reverse(slow);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4) 比较前半段和后半段</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">p1</span> <span class="operator">=</span> head, p2 = second;</span><br><span class="line">        <span class="keyword">while</span> (p2 != <span class="literal">null</span>) &#123; <span class="comment">// 后半段更短或相等</span></span><br><span class="line">            <span class="keyword">if</span> (p1.val != p2.val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            p1 = p1.next;</span><br><span class="line">            p2 = p2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ListNode <span class="title function_">reverse</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> <span class="literal">null</span>, cur = head;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">nxt</span> <span class="operator">=</span> cur.next;</span><br><span class="line">            cur.next = pre;</span><br><span class="line">            pre = cur;</span><br><span class="line">            cur = nxt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1159,7 +1157,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1336,7 +1334,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">51k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
