@@ -183,6 +183,123 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/b0393815.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b0393815.html" class="post-title-link" itemprop="url">大模型应用开发入门（一）Agent基本调用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-01-13 10:12:00" itemprop="dateCreated datePublished" datetime="2026-01-13T10:12:00+08:00">2026-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="agent注册"><a href="#agent注册" class="headerlink" title="agent注册"></a>agent注册</h2><p>用于和大模型api交互的类都继承了ChatClient接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;deepseek-chat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ChatClient <span class="title function_">deepseekChatClient</span><span class="params">(DeepSeekChatModel deepSeekChatModel)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ChatClient.create(deepSeekChatModel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="agent调用"><a href="#agent调用" class="headerlink" title="agent调用"></a>agent调用</h2><p>单轮对话中，可以直接链式调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">public</span> ChatClient agent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">                .prompt()</span><br><span class="line">                .user()</span><br><span class="line">                .call()</span><br><span class="line">                .chatResponse();</span><br><span class="line"></span><br><span class="line">    <span class="type">AssistantMessage</span> <span class="variable">assistant</span> <span class="operator">=</span> output</span><br><span class="line">                             .getResult()</span><br><span class="line">                             .getOutput()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ChatClient交互的输入和输出都要依赖Message接口的实现类</p>
+<p>而多轮对话中，为了使得模型有上下文记忆，需要其存储先前的消息并再次发送给大模型</p>
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>消息可以分为四类</p>
+<ul>
+<li>用户消息 UserMessage</li>
+<li>大模型消息 AssistantMessage</li>
+<li>系统提示 SystemMessage</li>
+<li>工具消息 ToolResponseMessage</li>
+</ul>
+<h3 id="聊天记忆"><a href="#聊天记忆" class="headerlink" title="聊天记忆"></a>聊天记忆</h3><p>ChatMemory 接口定义了聊天对话记忆的存储机制，提供添加消息、检索消息及清空对话历史的方法。</p>
+<p>常用方法</p>
+<ul>
+<li>add(String, Message) 指定会话id，添加消息</li>
+<li>get(String) 根据指定的会话id按添加顺序返回消息列表</li>
+<li>clear(String) 根据指定的会话id清空消息列表</li>
+</ul>
+<h4 id="MessageWindowChatMemory"><a href="#MessageWindowChatMemory" class="headerlink" title="MessageWindowChatMemory"></a>MessageWindowChatMemory</h4><p>MessageWindowChatMemory 维护固定容量的消息窗口（默认 20 条）。当消息超限时，自动移除较早的对话消息（始终保留系统消息）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MessageWindowChatMemory</span> <span class="variable">memory</span> <span class="operator">=</span> MessageWindowChatMemory.builder()</span><br><span class="line">    .maxMessages(<span class="number">10</span>)</span><br><span class="line">    .build();</span><br><span class="line">此为 Spring AI 自动配置 ChatMemory Bean 时采用的默认消息类型。</span><br></pre></td></tr></table></figure>
+
+<p>可以将历史交互统一塞入到chatMemory中，然后通过调用时的prompt方法来为模型提供上下文记忆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Prompt</span> <span class="variable">prompt</span> <span class="operator">=</span> Prompt.builder()</span><br><span class="line">        .messages(chatMemory.get(sessionId))</span><br><span class="line">        .build();</span><br><span class="line"><span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">        .prompt(prompt)</span><br><span class="line">        .call()</span><br><span class="line">        .chatResponse();</span><br></pre></td></tr></table></figure>
+
+<p>有了这些，就可以实现一个具备多轮对话功能的agent了</p>
+<p>还可以考虑将大模型的会话记忆入库使其持久化，实现长期记忆</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/fe69269d.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,7 +331,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -302,7 +419,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -392,7 +509,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -492,7 +609,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -587,7 +704,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -682,7 +799,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -776,7 +893,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -870,7 +987,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -963,7 +1080,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1007,106 +1124,6 @@
           <p>理论上我那个回溯也可以做，但我懒得写了</p>
 <p>就是三数之和多套了一层循环，注意有个用例可能导致四数之和超过int上限，要改用long，另外注意下第二个元素的去重规则</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">fourSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> left,right;</span><br><span class="line">        <span class="type">long</span> sum;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=nums.length-<span class="number">1</span>-<span class="number">3</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span> &amp;&amp; nums[i]==nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i+<span class="number">1</span>;j&lt;=nums.length-<span class="number">1</span>-<span class="number">2</span>;j++)&#123;</span><br><span class="line">                <span class="comment">// 注意一下这里</span></span><br><span class="line">                <span class="keyword">if</span>(j&gt;i+<span class="number">1</span> &amp;&amp; nums[j]==nums[j-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">                left = j+<span class="number">1</span>;</span><br><span class="line">                right = nums.length-<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">                    sum = (<span class="type">long</span>)nums[i]+(<span class="type">long</span>)nums[j]+(<span class="type">long</span>)nums[left]+(<span class="type">long</span>)nums[right];</span><br><span class="line">                    <span class="keyword">if</span>(sum&gt;target) right--;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(sum&lt;target) left++;</span><br><span class="line">                    <span class="keyword">else</span>&#123;</span><br><span class="line">                        result.add(Arrays.asList(nums[i],nums[j],nums[left],nums[right]));</span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right &amp;&amp; nums[left]==nums[left+<span class="number">1</span>]) left++;</span><br><span class="line">                        <span class="keyword">while</span>(left&lt;right &amp;&amp; nums[right]==nums[right-<span class="number">1</span>]) right--;</span><br><span class="line">                        left++;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/267ca72f.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/267ca72f.html" class="post-title-link" itemprop="url">15 三数之和</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-01-07 13:44:00" itemprop="dateCreated datePublished" datetime="2026-01-07T13:44:00+08:00">2026-01-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>明明是二刷却完全没印象，最后绞尽脑汁用回溯勉强没超时</p>
-<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>思路由两数之和推广而来，a+b+c&#x3D;0，统计a+b，找0-a-b是否存在即可<br>问题可以转化为，依次取数组中的两个数，判断这里两个数之和的负数是否在数组里，同时解唯一</p>
-<p>用哈希表统计数组中每个数字的个数，然后分两次循环遍历哈希表的键集合，每次取一个数字并减少其频数，判断两个键的和的负数是否在哈希表里。同时为了去重，强制让a&lt;&#x3D;b&lt;&#x3D;c，遍历完毕后恢复数字的频数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    HashMap&lt;Integer,Integer&gt; set;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        set = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=nums.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            set.put(nums[i],set.getOrDefault(nums[i],<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(Integer key:set.keySet())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> set.get(key);</span><br><span class="line">            set.put(key,t-<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span>(Integer nKey:set.keySet())&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> set.get(nKey);</span><br><span class="line">                set.put(nKey,c-<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(c&gt;<span class="number">0</span> &amp;&amp; nKey&gt;=key)&#123;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nKey+key;</span><br><span class="line">                    <span class="keyword">if</span>(set.containsKey(<span class="number">0</span>-sum) &amp;&amp; set.get(<span class="number">0</span>-sum)&gt;=<span class="number">1</span> &amp;&amp; <span class="number">0</span>-sum&gt;=nKey)&#123;</span><br><span class="line">                        List&lt;Integer&gt; tmp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(Arrays.asList(key,nKey,<span class="number">0</span>-sum));</span><br><span class="line">                        result.add(tmp);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                set.put(nKey,c);</span><br><span class="line">            &#125;</span><br><span class="line">            set.put(key,t);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><p>先给数组排序，然后对下标i，定义双指针left&#x3D;i+1，right&#x3D;length-1，这样自然满足之前的a&lt;&#x3D;b&lt;&#x3D;c的要求。</p>
-<p>然后计算i+left+right的和是不是0，大于0的话向左移动right，小于0的话向右移动right，直到left和right相遇。</p>
-<p>随后的问题是去重，当i递增时，i不应该跟自己刚刚遍历的元素一样，否则自然重复了。同时也要对left和right进行去重</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="type">int</span> left,right;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=nums.length-<span class="number">1</span>-<span class="number">2</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&gt;<span class="number">0</span> &amp;&amp; nums[i]==nums[i-<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            left = i+<span class="number">1</span>;</span><br><span class="line">            right = nums.length-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[left]+nums[right]&gt;<span class="number">0</span>) right--;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[left]+nums[right]&lt;<span class="number">0</span>) left++;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));</span><br><span class="line">                    <span class="keyword">while</span>(left&lt;right &amp;&amp; nums[right]==nums[right-<span class="number">1</span>]) right--;</span><br><span class="line">                    <span class="keyword">while</span>(left&lt;right &amp;&amp; nums[left]==nums[left+<span class="number">1</span>]) left++;</span><br><span class="line">                    <span class="comment">// 注意上面是去重，下面才是移动指针</span></span><br><span class="line">                    right--;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1193,7 +1210,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1370,13 +1387,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">54 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div><div id="days"></div>

@@ -183,6 +183,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/9872502a.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/9872502a.html" class="post-title-link" itemprop="url">算法题模版</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-01-15 21:12:00" itemprop="dateCreated datePublished" datetime="2026-01-15T21:12:00+08:00">2026-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">代码随想录</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>959</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>中序遍历、层序遍历、回溯直接套模版，把模版丢这了</p>
+<h2 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; st = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> root;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span> || !st.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">                st.push(cur);</span><br><span class="line">                cur = cur.left;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="type">TreeNode</span> <span class="variable">tmp</span> <span class="operator">=</span> st.pop();</span><br><span class="line">                result.add(tmp.val);</span><br><span class="line">                cur = tmp.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前中后是栈实现，层序是队列实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">checkFun02</span><span class="params">(TreeNode node)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    Queue&lt;TreeNode&gt; que = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;();</span><br><span class="line">    que.offer(node);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!que.isEmpty()) &#123;</span><br><span class="line">        List&lt;Integer&gt; itemList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> que.size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (len &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">tmpNode</span> <span class="operator">=</span> que.poll();</span><br><span class="line">            itemList.add(tmpNode.val);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (tmpNode.left != <span class="literal">null</span>) que.offer(tmpNode.left);</span><br><span class="line">            <span class="keyword">if</span> (tmpNode.right != <span class="literal">null</span>) que.offer(tmpNode.right);</span><br><span class="line">            len--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        resList.add(itemList);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>等到复习到这里再补充</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/c7a3beb3.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,7 +311,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -312,7 +409,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -406,7 +503,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -502,7 +599,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -595,7 +692,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -688,7 +785,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -781,7 +878,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -878,7 +975,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -986,7 +1083,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
+                <time title="修改时间：2026-03-05 20:35:09" itemprop="dateModified" datetime="2026-03-05T20:35:09+08:00">2026-03-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1038,123 +1135,6 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ToolExecutionResult</span> <span class="variable">toolExecutionResult</span> <span class="operator">=</span> toolCallingManager.executeToolCalls(prompt，lastChatResponse);</span><br><span class="line"><span class="comment">// prompt应包含历史消息，同时要确保lastChatResponse中含有ToolCalls请求</span></span><br><span class="line">chatMemory.clear(sessionId);        </span><br><span class="line">chatMemory.add(sessionId,toolExecutionResult.conversationHistory());</span><br></pre></td></tr></table></figure>
 
 <p>当大模型认为自己已经获取到了足够的信息时，其回复的消息中ToolCalls将会为空，可以据此判断当前对话是否可以结束。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/b0393815.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b0393815.html" class="post-title-link" itemprop="url">大模型应用开发入门（一）Agent基本调用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2026-01-13 10:12:00" itemprop="dateCreated datePublished" datetime="2026-01-13T10:12:00+08:00">2026-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-03-05 18:00:41" itemprop="dateModified" datetime="2026-03-05T18:00:41+08:00">2026-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">大模型应用开发</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="agent注册"><a href="#agent注册" class="headerlink" title="agent注册"></a>agent注册</h2><p>用于和大模型api交互的类都继承了ChatClient接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;deepseek-chat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ChatClient <span class="title function_">deepseekChatClient</span><span class="params">(DeepSeekChatModel deepSeekChatModel)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ChatClient.create(deepSeekChatModel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="agent调用"><a href="#agent调用" class="headerlink" title="agent调用"></a>agent调用</h2><p>单轮对话中，可以直接链式调用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">public</span> ChatClient agent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">                .prompt()</span><br><span class="line">                .user()</span><br><span class="line">                .call()</span><br><span class="line">                .chatResponse();</span><br><span class="line"></span><br><span class="line">    <span class="type">AssistantMessage</span> <span class="variable">assistant</span> <span class="operator">=</span> output</span><br><span class="line">                             .getResult()</span><br><span class="line">                             .getOutput()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ChatClient交互的输入和输出都要依赖Message接口的实现类</p>
-<p>而多轮对话中，为了使得模型有上下文记忆，需要其存储先前的消息并再次发送给大模型</p>
-<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>消息可以分为四类</p>
-<ul>
-<li>用户消息 UserMessage</li>
-<li>大模型消息 AssistantMessage</li>
-<li>系统提示 SystemMessage</li>
-<li>工具消息 ToolResponseMessage</li>
-</ul>
-<h3 id="聊天记忆"><a href="#聊天记忆" class="headerlink" title="聊天记忆"></a>聊天记忆</h3><p>ChatMemory 接口定义了聊天对话记忆的存储机制，提供添加消息、检索消息及清空对话历史的方法。</p>
-<p>常用方法</p>
-<ul>
-<li>add(String, Message) 指定会话id，添加消息</li>
-<li>get(String) 根据指定的会话id按添加顺序返回消息列表</li>
-<li>clear(String) 根据指定的会话id清空消息列表</li>
-</ul>
-<h4 id="MessageWindowChatMemory"><a href="#MessageWindowChatMemory" class="headerlink" title="MessageWindowChatMemory"></a>MessageWindowChatMemory</h4><p>MessageWindowChatMemory 维护固定容量的消息窗口（默认 20 条）。当消息超限时，自动移除较早的对话消息（始终保留系统消息）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MessageWindowChatMemory</span> <span class="variable">memory</span> <span class="operator">=</span> MessageWindowChatMemory.builder()</span><br><span class="line">    .maxMessages(<span class="number">10</span>)</span><br><span class="line">    .build();</span><br><span class="line">此为 Spring AI 自动配置 ChatMemory Bean 时采用的默认消息类型。</span><br></pre></td></tr></table></figure>
-
-<p>可以将历史交互统一塞入到chatMemory中，然后通过调用时的prompt方法来为模型提供上下文记忆</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Prompt</span> <span class="variable">prompt</span> <span class="operator">=</span> Prompt.builder()</span><br><span class="line">        .messages(chatMemory.get(sessionId))</span><br><span class="line">        .build();</span><br><span class="line"><span class="type">ChatResponse</span> <span class="variable">output</span> <span class="operator">=</span> agent.call()</span><br><span class="line">        .prompt(prompt)</span><br><span class="line">        .call()</span><br><span class="line">        .chatResponse();</span><br></pre></td></tr></table></figure>
-
-<p>有了这些，就可以实现一个具备多轮对话功能的agent了</p>
-<p>还可以考虑将大模型的会话记忆入库使其持久化，实现长期记忆</p>
 
       
     </div>
@@ -1241,7 +1221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1418,13 +1398,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">60k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">54 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div><div id="days"></div>
