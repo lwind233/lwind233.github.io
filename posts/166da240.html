@@ -28,7 +28,7 @@
 <meta property="og:description" content="动规题解：这题可以定义 dp[i] 表示是否能够到达下标 i。初始状态 dp[0]&#x3D;true，因为一开始就在第一个位置。对于每个位置 i，去枚举前面的所有位置 j，如果 j 本身可达，并且从 j 出发最远能够跳到 i 或更远，也就是 dp[j]&#x3D;&#x3D;true &amp;&amp; j+nums[j]&gt;&#x3D;i，那么就说明 i 也可达，令 dp[i]&#x3D;true。最后只要看 dp[n-1] 是否为 t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-12T04:56:00.000Z">
-<meta property="article:modified_time" content="2026-03-12T06:12:37.000Z">
+<meta property="article:modified_time" content="2026-03-16T17:44:38.000Z">
 <meta property="article:author" content="朗风">
 <meta property="article:tag" content="动态规划">
 <meta property="article:tag" content="贪心算法">
@@ -212,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2026-03-12 12:56:00 / 修改时间：14:12:37" itemprop="dateCreated datePublished" datetime="2026-03-12T12:56:00+08:00">2026-03-12</time>
+              <time title="创建时间：2026-03-12 12:56:00" itemprop="dateCreated datePublished" datetime="2026-03-12T12:56:00+08:00">2026-03-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2026-03-17 01:44:38" itemprop="dateModified" datetime="2026-03-17T01:44:38+08:00">2026-03-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -356,14 +362,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
