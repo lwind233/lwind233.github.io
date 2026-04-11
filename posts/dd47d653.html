@@ -20,20 +20,19 @@
     var CONFIG = {"hostname":"lwind233.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="模版题了，把树节点放到队列里，每层遍历先计算这一层有多少个节点，然后从队列中弹出节点，并把非空节点塞到队列里，遍历这一层的节点后进入新的一层 12345678910111213141516171819202122class Solution &#123;    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &amp;#12">
+  <meta name="description" content="答的挺差，只能说复盘了  你的项目是demo还是真实使用的 为什么要做这个项目 红包项目里的主要难点在哪 延时队列兜底是怎么做的（京东当时也问了，似乎对兜底比较感兴趣） 延时队列兜底的话多台并发怎么处理，是不是有问题 秒杀的话能不能抗住？测没测过qps？ 智能巡检怎么用（答的很烂，我自己说这个是个demo项目，感觉至少也得包装一下，感觉是这里烂了）八股环节 链表和数组有什么区别，是否线程安全，什么">
 <meta property="og:type" content="article">
-<meta property="og:title" content="102 二叉树的层序遍历">
-<meta property="og:url" content="https://lwind233.github.io/posts/bc922e49.html">
+<meta property="og:title" content="高德地图一面">
+<meta property="og:url" content="https://lwind233.github.io/posts/dd47d653.html">
 <meta property="og:site_name" content="鹭园风吟">
-<meta property="og:description" content="模版题了，把树节点放到队列里，每层遍历先计算这一层有多少个节点，然后从队列中弹出节点，并把非空节点塞到队列里，遍历这一层的节点后进入新的一层 12345678910111213141516171819202122class Solution &#123;    public List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &amp;#12">
+<meta property="og:description" content="答的挺差，只能说复盘了  你的项目是demo还是真实使用的 为什么要做这个项目 红包项目里的主要难点在哪 延时队列兜底是怎么做的（京东当时也问了，似乎对兜底比较感兴趣） 延时队列兜底的话多台并发怎么处理，是不是有问题 秒杀的话能不能抗住？测没测过qps？ 智能巡检怎么用（答的很烂，我自己说这个是个demo项目，感觉至少也得包装一下，感觉是这里烂了）八股环节 链表和数组有什么区别，是否线程安全，什么">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-04T08:04:00.000Z">
+<meta property="article:published_time" content="2026-04-11T15:39:00.000Z">
 <meta property="article:modified_time" content="2026-04-11T15:56:19.000Z">
 <meta property="article:author" content="朗风">
-<meta property="article:tag" content="二叉树">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lwind233.github.io/posts/bc922e49.html">
+<link rel="canonical" href="https://lwind233.github.io/posts/dd47d653.html">
 
 
 <script id="page-configurations">
@@ -46,7 +45,7 @@
   };
 </script>
 
-  <title>102 二叉树的层序遍历 | 鹭园风吟</title>
+  <title>高德地图一面 | 鹭园风吟</title>
   
 
 
@@ -189,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/bc922e49.html">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/dd47d653.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://github.com/lwind233.png">
@@ -202,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          102 二叉树的层序遍历
+          高德地图一面
         </h1>
 
         <div class="post-meta">
@@ -211,27 +210,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2026-03-04 16:04:00" itemprop="dateCreated datePublished" datetime="2026-03-04T16:04:00+08:00">2026-03-04</time>
+              <time title="创建时间：2026-04-11 23:39:00 / 修改时间：23:56:19" itemprop="dateCreated datePublished" datetime="2026-04-11T23:39:00+08:00">2026-04-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-04-11 23:56:19" itemprop="dateModified" datetime="2026-04-11T23:56:19+08:00">2026-04-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
+                  <a href="/categories/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
                 </span>
             </span>
 
@@ -241,7 +230,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>627</span>
+              <span>463</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -260,8 +249,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>模版题了，把树节点放到队列里，每层遍历先计算这一层有多少个节点，然后从队列中弹出节点，并把非空节点塞到队列里，遍历这一层的节点后进入新的一层</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> result;</span><br><span class="line">        q.offer(root);</span><br><span class="line">        <span class="keyword">while</span>(!q.isEmpty())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> q.size();</span><br><span class="line">            List&lt;Integer&gt; tmp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=size-<span class="number">1</span>;i++)&#123;</span><br><span class="line">                <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> q.poll();</span><br><span class="line">                tmp.add(cur.val);</span><br><span class="line">                <span class="keyword">if</span>(cur.left!=<span class="literal">null</span>) q.offer(cur.left);</span><br><span class="line">                <span class="keyword">if</span>(cur.right!=<span class="literal">null</span>) q.offer(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">            result.add(tmp);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>答的挺差，只能说复盘了</p>
+<ol>
+<li>你的项目是demo还是真实使用的</li>
+<li>为什么要做这个项目</li>
+<li>红包项目里的主要难点在哪</li>
+<li>延时队列兜底是怎么做的（京东当时也问了，似乎对兜底比较感兴趣）</li>
+<li>延时队列兜底的话多台并发怎么处理，是不是有问题</li>
+<li>秒杀的话能不能抗住？测没测过qps？</li>
+<li>智能巡检怎么用（答的很烂，我自己说这个是个demo项目，感觉至少也得包装一下，感觉是这里烂了）<br>八股环节</li>
+<li>链表和数组有什么区别，是否线程安全，什么数组线程安全，原理是什么</li>
+<li>map的操作原理，线程安全的map是什么，怎么加的锁</li>
+<li>线程池的流程、拒绝策略</li>
+<li>两个锁区别</li>
+<li>synchronized在静态方法和普通方法上的区别</li>
+<li>公平锁原理</li>
+<li>mysql底层数据结构是什么，怎么查找页内数据</li>
+<li>联合索引有了解过吗，每个节点是怎么保存的</li>
+<li>索引失效的场景</li>
+<li>了解过什么是索引下推吗？（这个完全不知道）</li>
+<li>mysql的默认隔离级别是什么</li>
+<li>可重复读是怎么实现的</li>
+<li>可重复读可以解决幻读问题吗</li>
+<li>redis底层结构是什么</li>
+<li>zset底层是什么</li>
+<li>redis缓存淘汰策略</li>
+<li>redis怎么找到过期key</li>
+<li>redis哨兵机制流程</li>
+<li>哨兵共识建立的流程</li>
+<li>缓存穿透、雪崩的应对方法</li>
+</ol>
 
     </div>
 
@@ -270,9 +287,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
-          </div>
 
         
 
@@ -280,13 +294,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/16054b3c.html" rel="prev" title="543 二叉树直径">
-      <i class="fa fa-chevron-left"></i> 543 二叉树直径
+    <a href="/posts/980eea27.html" rel="prev" title="京东后端一面">
+      <i class="fa fa-chevron-left"></i> 京东后端一面
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/c57d8a21.html" rel="next" title="108 将有序数组转换为二叉搜索树">
-      108 将有序数组转换为二叉搜索树 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
