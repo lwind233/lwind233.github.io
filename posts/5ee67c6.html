@@ -20,20 +20,19 @@
     var CONFIG = {"hostname":"lwind233.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="这题可以用快速选择解决，核心思想是不必把整个数组排好序，只需要不断缩小目标元素所在的区间。对于第 k 大元素，可以先转换成“升序排序后下标为 n-k 的元素”。每一轮随机选择一个 pivot，然后对当前区间做三路划分：把数组分成 &lt; pivot、&#x3D;&#x3D; pivot、&gt; pivot 三部分。划分完成后，如果目标下标落在中间这段 &#x3D;&#x3D; pivot 的区">
+  <meta name="description" content="新建环境1python -m venv .venv 将环境目录设置为.venv，目录结构大致为 12345678.venv&#x2F;├── Lib&#x2F;│   └── site-packages&#x2F;   # 第三方依赖├── Scripts&#x2F;│   ├── python.exe       # 虚拟环境 Python│   ├── pip.exe│   └── Activate.ps1└── pyvenv.cf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="215 数组中的第k个最大元素">
-<meta property="og:url" content="https://lwind233.github.io/posts/925d0844.html">
+<meta property="og:title" content="venv使用">
+<meta property="og:url" content="https://lwind233.github.io/posts/5ee67c6.html">
 <meta property="og:site_name" content="鹭园风吟">
-<meta property="og:description" content="这题可以用快速选择解决，核心思想是不必把整个数组排好序，只需要不断缩小目标元素所在的区间。对于第 k 大元素，可以先转换成“升序排序后下标为 n-k 的元素”。每一轮随机选择一个 pivot，然后对当前区间做三路划分：把数组分成 &lt; pivot、&#x3D;&#x3D; pivot、&gt; pivot 三部分。划分完成后，如果目标下标落在中间这段 &#x3D;&#x3D; pivot 的区">
+<meta property="og:description" content="新建环境1python -m venv .venv 将环境目录设置为.venv，目录结构大致为 12345678.venv&#x2F;├── Lib&#x2F;│   └── site-packages&#x2F;   # 第三方依赖├── Scripts&#x2F;│   ├── python.exe       # 虚拟环境 Python│   ├── pip.exe│   └── Activate.ps1└── pyvenv.cf">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-12T03:52:00.000Z">
-<meta property="article:modified_time" content="2026-03-12T03:54:12.000Z">
+<meta property="article:published_time" content="2026-08-18T07:23:00.000Z">
+<meta property="article:modified_time" content="2026-08-18T07:23:15.000Z">
 <meta property="article:author" content="朗风">
-<meta property="article:tag" content="快速选择">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://lwind233.github.io/posts/925d0844.html">
+<link rel="canonical" href="https://lwind233.github.io/posts/5ee67c6.html">
 
 
 <script id="page-configurations">
@@ -46,7 +45,7 @@
   };
 </script>
 
-  <title>215 数组中的第k个最大元素 | 鹭园风吟</title>
+  <title>venv使用 | 鹭园风吟</title>
   
 
 
@@ -189,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/925d0844.html">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/5ee67c6.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://github.com/lwind233.png">
@@ -202,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          215 数组中的第k个最大元素
+          venv使用
         </h1>
 
         <div class="post-meta">
@@ -213,20 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-03-12 11:52:00 / 修改时间：11:54:12" itemprop="dateCreated datePublished" datetime="2026-03-12T11:52:00+08:00">2026-03-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
-                </span>
+              <time title="创建时间：2026-08-18 15:23:00 / 修改时间：15:23:15" itemprop="dateCreated datePublished" datetime="2026-08-18T15:23:00+08:00">2026-08-18</time>
             </span>
 
           <br>
@@ -235,7 +221,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>321</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -254,8 +240,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这题可以用快速选择解决，核心思想是不必把整个数组排好序，只需要不断缩小目标元素所在的区间。对于第 k 大元素，可以先转换成“升序排序后下标为 n-k 的元素”。每一轮随机选择一个 pivot，然后对当前区间做三路划分：把数组分成 &lt; pivot、&#x3D;&#x3D; pivot、&gt; pivot 三部分。划分完成后，如果目标下标落在中间这段 &#x3D;&#x3D; pivot 的区间里，说明答案已经确定，直接返回；如果目标下标在左边，就继续去左半部分找；如果在右边，就继续去右半部分找。三路划分相比普通 partition 的优势在于，遇到大量重复元素时，可以一次性把所有等于 pivot 的元素归到中间，避免反复递归相同数字导致退化，因此这版写法比普通二路划分更稳。平均时间复杂度是 O(n)，空间复杂度是 O(1)。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Random</span> <span class="variable">random</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findKthLargest</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">target</span> <span class="operator">=</span> nums.length-k;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">pivotIndex</span> <span class="operator">=</span> left + random.nextInt(right - left + <span class="number">1</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> nums[pivotIndex];</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> <span class="variable">lB</span> <span class="operator">=</span> left;</span><br><span class="line">            <span class="type">int</span> <span class="variable">rB</span> <span class="operator">=</span> right;</span><br><span class="line">            <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> left;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(i&lt;=rB)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]&lt;p)&#123;</span><br><span class="line">                    swap(nums,lB,i);</span><br><span class="line">                    lB++;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]&gt;p)&#123;</span><br><span class="line">                    swap(nums,rB,i);</span><br><span class="line">                    rB--;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(lB&lt;=target &amp;&amp; target&lt;=rB) <span class="keyword">return</span> nums[target];</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;lB) right = lB-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(target&gt;rB) left = rB+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> a, <span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> nums[a];</span><br><span class="line">        nums[a] = nums[b];</span><br><span class="line">        nums[b] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="新建环境"><a href="#新建环境" class="headerlink" title="新建环境"></a>新建环境</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python <span class="literal">-m</span> venv .venv</span><br></pre></td></tr></table></figure>
+<p>将环境目录设置为.venv，目录结构大致为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.venv/</span><br><span class="line">├── Lib/</span><br><span class="line">│   └── site-packages/   # 第三方依赖</span><br><span class="line">├── Scripts/</span><br><span class="line">│   ├── python.exe       # 虚拟环境 Python</span><br><span class="line">│   ├── pip.exe</span><br><span class="line">│   └── Activate.ps1</span><br><span class="line">└── pyvenv.cfg           # 基础 Python 信息</span><br></pre></td></tr></table></figure>
+<h3 id="虚拟环境使用"><a href="#虚拟环境使用" class="headerlink" title="虚拟环境使用"></a>虚拟环境使用</h3><p>激活虚拟环境</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\.venv\Scripts\Activate.ps1</span><br></pre></td></tr></table></figure>
+<p>终端会显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(.venv) PS D:\project&gt;</span><br></pre></td></tr></table></figure>
+<p>此时python、pip、pytest会指向.venv中的程序</p>
+<p>安装依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install 包名</span><br></pre></td></tr></table></figure>
+<p>不直接用pip可以保证用虚拟环境的pip</p>
 
     </div>
 
@@ -264,9 +259,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%BF%AB%E9%80%9F%E9%80%89%E6%8B%A9/" rel="tag"># 快速选择</a>
-          </div>
 
         
 
@@ -274,13 +266,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/f51b5b3e.html" rel="prev" title="155 最小栈">
-      <i class="fa fa-chevron-left"></i> 155 最小栈
+    <a href="/posts/7d588bf1.html" rel="prev" title="参考文档">
+      <i class="fa fa-chevron-left"></i> 参考文档
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/5d9282e4.html" rel="next" title="121 买卖股票最佳时机">
-      121 买卖股票最佳时机 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -339,6 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">新建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">虚拟环境使用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

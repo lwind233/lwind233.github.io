@@ -183,6 +183,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/26c1b866.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://github.com/lwind233.png">
+      <meta itemprop="name" content="朗风">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鹭园风吟">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/26c1b866.html" class="post-title-link" itemprop="url">437 路径之和III</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-03-05 11:00:00 / 修改时间：11:10:43" itemprop="dateCreated datePublished" datetime="2026-03-05T11:00:00+08:00">2026-03-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>739</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先深度优先搜索遍历整颗树，每次遍历都是一条路径，在这条路径上记录前缀和，查找前缀和频率统计表中是否存在前缀和使二者之差等于目标值（即存在子数组和等于目标值），随后将前缀和记录存入前缀和频率统计表中，对左右子节点进行搜索，搜索完毕后从前缀和频率统计表中删除掉当前的前缀和统计信息，实现回溯。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> result=<span class="number">0</span>;</span><br><span class="line">    Map&lt;Long,Long&gt; bsumPath;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pathSum</span><span class="params">(TreeNode root, <span class="type">int</span> targetSum)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        bsumPath = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line">        bsumPath.put(<span class="number">0L</span>,<span class="number">1L</span>);</span><br><span class="line">        backTrace(root,targetSum,<span class="number">0L</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backTrace</span><span class="params">(TreeNode root, <span class="type">int</span> targetSum, <span class="type">long</span> bsum)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        bsum += root.val;</span><br><span class="line">        result+=bsumPath.getOrDefault(bsum-targetSum,<span class="number">0L</span>);</span><br><span class="line">        bsumPath.put(bsum,bsumPath.getOrDefault(bsum,<span class="number">0L</span>)+<span class="number">1</span>);</span><br><span class="line">        backTrace(root.left,targetSum,bsum);</span><br><span class="line">        backTrace(root.right,targetSum,bsum);</span><br><span class="line">        bsumPath.put(bsum,bsumPath.get(bsum)-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/e24aab17.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -977,97 +1064,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://lwind233.github.io/posts/7a67cf96.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://github.com/lwind233.png">
-      <meta itemprop="name" content="朗风">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鹭园风吟">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/7a67cf96.html" class="post-title-link" itemprop="url">138 随机链表的复制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-03-04 10:25:00 / 修改时间：10:29:41" itemprop="dateCreated datePublished" datetime="2026-03-04T10:25:00+08:00">2026-03-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/hot100/" itemprop="url" rel="index"><span itemprop="name">hot100</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="节点交替法"><a href="#节点交替法" class="headerlink" title="节点交替法"></a>节点交替法</h2><p>最优解法</p>
-<p>在链表中的每一个结点后穿插一个与之值一样的新节点，那么新结点的random就是原结点random的下一个值，这样就可以给新结点的random赋好值，随后再把新结点串在一起即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Node <span class="title function_">copyRandomList</span><span class="params">(Node head)</span> &#123;</span><br><span class="line">        Node p,cur;</span><br><span class="line">        cur = head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            p = <span class="keyword">new</span> <span class="title class_">Node</span>(cur.val);</span><br><span class="line">            p.next = cur.next;</span><br><span class="line">            cur.next = p;</span><br><span class="line">            cur = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        cur = head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.random!=<span class="literal">null</span>)&#123;</span><br><span class="line">                cur.next.random = cur.random.next;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.next.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Node</span> <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">Node</span> <span class="variable">pre</span> <span class="operator">=</span> result; </span><br><span class="line">        cur = head;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            pre.next = cur.next;</span><br><span class="line">            pre = cur.next;</span><br><span class="line">            cur.next = pre.next;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="哈希表法"><a href="#哈希表法" class="headerlink" title="哈希表法"></a>哈希表法</h2><p>建立两个哈希表，一个是原链表的node:idx哈希表，另一个是新链表的idx:node哈希表。仿照原链表构建完新链表的同时记录好原链表每个node对应的idx，然后再遍历一遍原链表找出random对应的下标，为新链表赋值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Node <span class="title function_">copyRandomList</span><span class="params">(Node head)</span> &#123;</span><br><span class="line">        Map&lt;Node, Integer&gt; map1 = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line">        Map&lt;Integer, Node&gt; map2 = <span class="keyword">new</span> <span class="title class_">LinkedHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="type">Node</span> <span class="variable">thead</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">Node</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">cur2</span> <span class="operator">=</span> thead;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="type">Node</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="number">0</span>);</span><br><span class="line">            tmp.val = cur.val;</span><br><span class="line"></span><br><span class="line">            map1.put(cur,count);</span><br><span class="line">            map2.put(count,tmp);</span><br><span class="line"></span><br><span class="line">            cur2.next = tmp;</span><br><span class="line">            cur2 = tmp;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cur = head;</span><br><span class="line">        cur2 = thead.next;</span><br><span class="line">        <span class="keyword">while</span>(cur!=<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.random!=<span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">idx</span> <span class="operator">=</span> map1.get(cur.random);</span><br><span class="line">                cur2.random = map2.get(idx);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            cur = cur.next;</span><br><span class="line">            cur2 = cur2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> thead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1139,7 +1135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
